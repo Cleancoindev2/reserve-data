@@ -62,6 +62,20 @@ func (s *Storage) initAssets() error {
 		Rebalance:    false,
 		IsQuote:      true,
 	})
+	if err != nil {
+		return err
+	}
+	dgxAddr := "0x4f3AfEC4E5a3F2A6a1A411DEF7D7dFe50eE057bF"
+	_, err = s.stmts.newAsset.Exec(&createAssetParams{
+		Symbol:       "DGX",
+		Name:         "Digix Gold Token",
+		Address:      &dgxAddr,
+		Decimals:     18,
+		Transferable: true,
+		SetRate:      v3.SetRateNotSet.String(),
+		Rebalance:    false,
+		IsQuote:      true,
+	})
 	return err
 }
 
