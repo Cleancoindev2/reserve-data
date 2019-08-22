@@ -165,7 +165,7 @@ func initData(t *testing.T, s *Storage) {
 								Quote: 1,
 							},
 							{
-								Quote: 2,
+								Quote: 3,
 							},
 						},
 					},
@@ -456,7 +456,7 @@ func TestStorage_SettingChangeCreate(t *testing.T) {
 									TargetRatio:       0,
 									TradingPairs: []common.TradingPair{
 										{
-											Quote: 3,
+											Quote: 4,
 										},
 									},
 								},
@@ -482,7 +482,7 @@ func TestStorage_SettingChangeCreate(t *testing.T) {
 					{
 						Type: common.ChangeTypeUpdateAsset,
 						Data: common.UpdateAssetEntry{
-							AssetID:            2,
+							AssetID:            3,
 							Symbol:             nil,
 							Name:               nil,
 							Address:            nil,
