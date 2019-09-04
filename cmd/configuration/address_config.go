@@ -18,9 +18,9 @@ var AddressConfigs = map[string]common.AddressConfig{
 		InternalNetwork: "0x91a502C678605fbCe581eae053319747482276b9",
 	},
 	common.StagingMode: {
-		Reserve:         "0x2C5a182d280EeB5824377B98CD74871f78d6b8BC",
+		Reserve:         "0xbaede2153857c76a1a41750bcebbf9aa9912793a",
 		Wrapper:         "0x6172AFC8c00c46E0D07ce3AF203828198194620a",
-		Pricing:         "0xe3E415a7a6c287a95DC68a01ff036828073fD2e6",
+		Pricing:         "0xbdc31382f6b7a1440b1de286ff9c9605a6142a94",
 		Network:         "0xC14f34233071543E979F6A79AA272b0AB1B4947D",
 		InternalNetwork: "0x706aBcE058DB29eB36578c463cf295F180a1Fe9C",
 	},
