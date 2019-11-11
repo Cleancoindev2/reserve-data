@@ -258,7 +258,7 @@ func (s *Server) GetRate(c *gin.Context) {
 func tokenExisted(tokenAddr ethereum.Address, tokens []common.Token) bool {
 	exist := false
 	for _, token := range tokens {
-		if token.Address == tokenAddr.Hex() {
+		if ethereum.HexToAddress(token.Address) == tokenAddr {
 			exist = true
 			break
 		}
