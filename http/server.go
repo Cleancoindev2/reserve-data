@@ -6,6 +6,7 @@ import (
 	"math/big"
 	"strconv"
 
+	ethereum "github.com/ethereum/go-ethereum/common"
 	"github.com/getsentry/raven-go"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-contrib/sentry"
@@ -34,6 +35,7 @@ type Server struct {
 	blockchain     Blockchain
 	settingStorage storage.Interface
 	l              *zap.SugaredLogger
+	listedTokens   []ethereum.Address
 }
 
 func getTimePoint(c *gin.Context, useDefault bool, l *zap.SugaredLogger) uint64 {
@@ -485,7 +487,7 @@ func NewHTTPServer(
 		false,
 	))
 
-	return &Server{
+	s := &Server{
 		app:            app,
 		core:           core,
 		host:           host,
@@ -494,4 +496,15 @@ func NewHTTPServer(
 		settingStorage: settingStorage,
 		l:              zap.S(),
 	}
+
+	// initiate listed token
+
+	listedTokens, err := s.blockchain.GetListedTokens()
+	if err != nil {
+		s.l.Errorw("failed to initiate listed tokens", "error", err)
+	}
+
+	s.listedTokens = listedTokens
+
+	return s
 }

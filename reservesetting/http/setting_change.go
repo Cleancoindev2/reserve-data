@@ -493,6 +493,7 @@ func (s *Server) checkCreateAssetParams(createEntry common.CreateAssetEntry) err
 			return common.ErrAssetAddressIsNotIndexInContract
 		}
 	}
+
 	if createEntry.Rebalance && createEntry.RebalanceQuadratic == nil {
 		return common.ErrRebalanceQuadraticMissing
 	}
