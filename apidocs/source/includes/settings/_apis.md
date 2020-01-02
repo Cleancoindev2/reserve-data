@@ -389,3 +389,29 @@ curl -X GET "https://gateway.local/v3/trading-pair/1"
 ### HTTP Request
 
 `GET https://gateway.local/v3/trading-pair/:trading_pair_id`
+
+## Get feed configurations
+
+```shell
+curl -X GET "https://gateway.local/v3/feed-configurations"
+```
+
+> sample response
+
+```json
+{
+    "data": [
+        {
+        "name": "DGX",
+        "enabled": true,
+        "base_volatility_spread": 0,
+        "normal_spread": 0
+        },
+        ...
+    ],
+    "success": true
+}
+```
+### HTTP Request
+
+`GET https://gateway.local/v3/feed-configurations`
