@@ -377,6 +377,9 @@ func (ep *Endpoint) GetInfo() (exchange.Binainfo, error) {
 
 // GetDepositAddress get asset depostit address from binance
 func (ep *Endpoint) GetDepositAddress(asset string) (exchange.Binadepositaddress, error) {
+	var (
+		logger = ep.l.With("func", caller.GetCurrentFunctionName())
+	)
 	result := exchange.Binadepositaddress{}
 	respBody, err := ep.GetResponse(
 		"GET",
@@ -389,6 +392,7 @@ func (ep *Endpoint) GetDepositAddress(asset string) (exchange.Binadepositaddress
 	)
 	if err == nil {
 		if err = json.Unmarshal(respBody, &result); err != nil {
+			logger.Errorw("failed to unmarshal deposit address response", "error", err)
 			return result, err
 		}
 		if !result.Success {

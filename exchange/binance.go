@@ -105,8 +105,12 @@ func (bn *Binance) QueryOrder(symbol string, id uint64) (done float64, remaining
 // Trade create an order in binance
 func (bn *Binance) Trade(tradeType string, pair commonv3.TradingPairSymbols, rate float64, amount float64) (id string,
 	done float64, remaining float64, finished bool, err error) {
+	var (
+		logger = bn.l.With("func", caller.GetCurrentFunctionName())
+	)
 	result, err := bn.interf.Trade(tradeType, pair, rate, amount)
 	if err != nil {
+		logger.Errorw("failed to trade on binance", "error", err)
 		return "", 0, 0, false, err
 	}
 	done, remaining, finished, err = bn.QueryOrder(
@@ -190,10 +194,14 @@ func (bn *Binance) FetchOnePairData(
 
 // FetchPriceData fetch all order book from timepoint
 func (bn *Binance) FetchPriceData(timepoint uint64) (map[uint64]common.ExchangePrice, error) {
+	var (
+		logger = bn.l.With("func", caller.GetCurrentFunctionName())
+	)
 	wait := sync.WaitGroup{}
 	data := sync.Map{}
 	pairs, err := bn.TokenPairs()
 	if err != nil {
+		logger.Errorw("failed to get token pair from storage", "err", err)
 		return nil, err
 	}
 	var (
